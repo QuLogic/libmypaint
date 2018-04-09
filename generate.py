@@ -223,13 +223,13 @@ def generate_public_settings_code():
 
 
 if __name__ == '__main__':
-    _init_globals_from_json("brushsettings.json")
     script = sys.argv[0]
     try:
-        public_header_file, internal_header_file = sys.argv[1:]
+        settings_file, public_header_file, internal_header_file = sys.argv[1:]
     except:
-        msg = "usage: {} PUBLICdotH INTERNALdotH".format(script)
+        msg = "usage: {} SETTINGS.json PUBLICdotH INTERNALdotH".format(script)
         print(msg, file=sys.stderr)
         sys.exit(2)
+    _init_globals_from_json(settings_file)
     writefile(public_header_file, generate_public_settings_code())
     writefile(internal_header_file, generate_internal_settings_code())
